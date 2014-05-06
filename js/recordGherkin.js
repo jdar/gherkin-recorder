@@ -26,9 +26,12 @@ $(function(){
           console.log("I press enter");
         });
 	$('a').click(function(e) {
-          //console.log("I visit %o", $(e.target).attr("href"));
           console.log("I click %o", $(e.target).text());
 	});
+	$(':submit').click(function(e) {
+          console.log("I click %o", $(e.target).val());
+	});
+
         $('select').change(function(e){
           console.log("I select %o", $(e.target).val());
         });
