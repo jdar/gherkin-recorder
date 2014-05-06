@@ -1,0 +1,58 @@
+{
+    "name": "GherkinRecorder",
+    "version": "0.0.2",
+    "manifest_version": 2,
+	"content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'",
+	"browser_action": {
+		"name": "Gherkin Recorder",
+		"icons": ["icon.png"],
+		"default_icon": "icon.png"
+	},	
+  "description": "Record Keystrokes",
+  "homepage_url": "http://powerauctions.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  //"options_page": "src/options_custom/index.html",
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "gherkin recorder",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "clipboardRead",
+    "contentSettings",
+    "contextMenus"
+  ],
+	"content_scripts": [
+		{
+			"matches": ["http://github.com/*/edit/*", "https://github.com/*/edit/*"],
+			"js": ["js/jquery.js", "js/firepad/firebase.js", "js/firepad/codemirror.js", "js/firepad/firepad.js", "js/firepad/userlist.js", "js/content.js"],
+			"css": ["css/firepad/codemirror.css", "css/firepad/firepad.css", "css/custom.css", "css/firepad/userlist.css"]
+		},
+		{
+			"matches": ["http://github.com/*", "https://github.com/*"],
+			"js": ["js/jquery.js", "js/editButton.js"],
+			"css": ["css/custom.css"]
+		},
+		{
+			"matches": ["http://github.com/*/*", "https://github.com/*/*"],
+			"js": ["js/jquery.js", "js/social/scriptTagContext.js", "js/social/plusone.js"]
+		},
+//https://developer.chrome.com/extensions/match_patterns
+		{
+			"matches": ["https://*.powerauctions.com/*", "http://localhost/*","<all_urls>"],
+			"js": ["js/jquery.js","js/recordGherkin.js"]
+		}			
+	],
+    "permissions": [
+        "https://apis.google.com/js/plusone.js"
+    ],	
+	"web_accessible_resources" : ["js/recordGherkin.js", "js/content.js", "js/editButton.js", "js/jquery.js", "js/firepad/codemirror.js", "js/firepad/firebase.js",  "js/firepad/userlist.js", "js/firepad/firepad.js"]
+}
